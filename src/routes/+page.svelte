@@ -290,7 +290,6 @@
 
 <style>
 	svg {
-		max-height: 80vh;
 		border: 1px solid black;
 	}
 
