@@ -104,6 +104,16 @@
 				cx={embedding[Number(k)].x}
 				cy={embedding[Number(k)].y}
 			/>
+			{#if textMode}
+				<text
+					class="unselectable"
+					x={embedding[Number(k)].x}
+					y={embedding[Number(k)].y}
+					font-size="0.3em"
+					style="pointer-events: none; user-select: none;"
+					fill="red"
+				>{k}</text>
+			{/if}
 		{/each}
 	</g>
 </svg>
@@ -112,6 +122,8 @@
 <label for="move">{moveMode ? "move mode" : "edit mode"}</label>
 <input type="checkbox" name="snap" id="" bind:checked={snapMode}>
 <label for="snap">{snapMode ? "snap to grid" : "no snap"}</label>
+<input type="checkbox" name="text" id="" bind:checked={textMode}>
+<label for="text">{textMode ? "show text" : "hide text"}</label>
 <p
 	contenteditable
 	bind:innerText={error_msg}
@@ -124,6 +136,7 @@
 <script lang="ts">
 	$: moveMode = false;
 	$: snapMode = true;
+	$: textMode = true;
 
 	let N = 3;
 	let MaxId = N;
@@ -306,5 +319,14 @@
 
 	line {
 		stroke: black;
+	}
+
+	.unselectable {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 </style>
