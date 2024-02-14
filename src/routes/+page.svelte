@@ -76,6 +76,7 @@
 	<g id="vertices_container">
 		{#each Object.entries(adj) as [k, v]}
 			<circle
+				style="pointer-events: none;"
 				r="1.4"
 				cx={embedding[Number(k)].x}
 				cy={embedding[Number(k)].y}
