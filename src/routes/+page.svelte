@@ -76,6 +76,12 @@
 	<g id="vertices_container">
 		{#each Object.entries(adj) as [k, v]}
 			<circle
+				r="1.4"
+				cx={embedding[Number(k)].x}
+				cy={embedding[Number(k)].y}
+				fill="white"
+			/>
+			<circle
 				r="1"
 				on:click={(evt) => {
 					if (moveMode) return;
