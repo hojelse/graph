@@ -145,20 +145,12 @@
 	$: snapMode = true;
 	$: textMode = true;
 
-	let N = 3;
+	let N = 0;
 	let NextId = N;
 
-	let adj: Record<number, Set<number>> = {
-		0: new Set([1, 2]),
-		1: new Set([0, 2]),
-		2: new Set([0, 1])
-	}
+	let adj: Record<number, Set<number>> = {}
 
-	let embedding: Record<number, {x: number, y: number}> = {
-		0: {x: 50, y: 50},
-		1: {x: 40, y: 65},
-		2: {x: 60, y: 65}
-	}
+	let embedding: Record<number, {x: number, y: number}> = {}
 
 	function addVertex(x: number, y: number) {
 		N++;
