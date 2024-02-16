@@ -18,7 +18,6 @@
 				(x1-dist <= x2 && x2 <= x1+dist) &&
 				(y1-dist <= y2 && y2 <= y1+dist)
 			) {
-				console.log("too close")
 				return;
 			}
 		}
@@ -48,6 +47,16 @@
 		drag_to = null;
 	}}
 >
+	{#each Array.from({length: 100}, (_, i) => i) as i}
+		{#each Array.from({length: 100}, (_, j) => j) as j}
+			<circle
+				r="0.1"
+				cx={i}
+				cy={j}
+				fill="lightgray"
+			/>
+		{/each}
+	{/each}
 	{#if drag_from != null && drag_to != null}
 		<line
 			stroke="black"
@@ -95,9 +104,7 @@
 				}}
 				on:pointerup={(evt) => {
 					if (moveMode) return;
-					console.log("hello?")
 					if (drag_from) {
-						console.log("hello????")
 						addEdge(drag_from, Number(k));
 					}
 				}}
@@ -139,7 +146,7 @@
 	$: textMode = true;
 
 	let N = 3;
-	let MaxId = N;
+	let NextId = N;
 
 	let adj: Record<number, Set<number>> = {
 		0: new Set([1, 2]),
@@ -155,7 +162,7 @@
 
 	function addVertex(x: number, y: number) {
 		N++;
-		const newId = MaxId++;
+		const newId = NextId++;
 		console.log("add", newId)
 		
 		adj[newId] = new Set();
@@ -276,6 +283,8 @@
 			}
 
 			N = newN;
+			NextId = Object.keys(newEmbedding).reduce((prev, curr) => Math.max(prev, Number(curr)), 0) + 1;
+			console.log("NextId", NextId)
 			embedding = newEmbedding;
 			adj = newAdj;
 			error_msg = ""
